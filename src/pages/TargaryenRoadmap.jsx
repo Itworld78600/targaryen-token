@@ -1,60 +1,8 @@
-import { Container, Paper, Typography, Box } from "@mui/material";
 import React from "react";
 import { roadmapBg } from "../components/SmallComponents/Images";
+import { Box, Container, Typography } from "@mui/material";
 
 function TargaryenRoadmap() {
-  const data = [
-    {
-      title: "Token Development",
-      timeline: "Months 1-2",
-      content: [
-        "Create business LLC",
-        "Token Creation & Smart Contract Deployment.",
-        "Conduct thorough auditing and security checks of the smart contract.",
-        "Develop official website & white paper.",
-        "Liquidity pool lock & Launch Targaryen Token (TGN) on Binance Smart Chain.",
-      ],
-    },
-    {
-      title: "Initial Community Building And Holders",
-      timeline: "Months 3-6",
-      content: [
-        "Create all social media platforms.",
-        "Engage with all crypto influencers.",
-        "Launch presale tokens for 3 months for early investors.",
-        "Get 5,000 Targaryen holders.",
-      ],
-    },
-    {
-      title: "Grow Holders & Prepare For Targaryen War",
-      timeline: "Months 3-6",
-      content: [
-        "Release tokens for website for public fairly by 3 months.",
-        "Get 10,000 Targaryen holders.",
-        "Initiate war strategy between holders to build wealth for their community & future.",
-      ],
-    },
-    {
-      title: "Token Listing And Community Growth And Start War",
-      timeline: "Months 12-13",
-      content: [
-        "Listing for all decentralized platform after year of token launch.",
-        "Prepare war with all crypto coin, making ranking on exchanges.",
-        "Get 20,000 Targaryen holders.",
-        "Start looking for partnership with major film producers and writers for major film production.",
-      ],
-    },
-  ];
-
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
-
   return (
     <Box
       component="section"
@@ -64,6 +12,8 @@ function TargaryenRoadmap() {
         backgroundRepeat: "no-repeat",
         backgroundSize: { xs: "cover", md: "100% 100%" },
         backgroundPosition: "center center",
+        pt: 8,
+        pb: 5,
       }}
     >
       <Container maxWidth={"xl"}>
@@ -94,7 +44,7 @@ function TargaryenRoadmap() {
               maxWidth: "1100px",
               mx: "auto",
               zIndex: 3,
-              my: 4.5,
+              my: 7,
             }}
           >
             Targaryen Token is committed to continuous innovation, growth, and
@@ -102,6 +52,102 @@ function TargaryenRoadmap() {
             driving decentralized finance forward and integrating Targaryen
             Token across multiple platforms and ecosystems.
           </Typography>
+        </Box>
+
+        <Box>
+          <Box className="timeline-container">
+            <Box className="timeline-item">
+              <Box className="timeline-header">Token Development</Box>
+              <Box className="timeline-content">
+                <Typography variant="h3" my={3}>
+                  (Months 1-2)
+                </Typography>
+                <Box component="ul">
+                  <Box component="li"> -Create business LLC</Box>
+                  <Box component="li">
+                    -Token Creation & Smart Contract Deployment.
+                  </Box>
+                  <Box component="li">
+                    - Conduct thorough auditing and security checks of the smart
+                    contract.
+                  </Box>
+                  <Box component="li">
+                    -Develop official website & white paper.
+                  </Box>
+                  <Box component="li">
+                    - Liquidity pool lock & Launch Targaryen Token (TGN) on
+                    Binance Smart chain.
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+
+            <Box className="timeline-item">
+              <Box className="timeline-header">
+                Initial Community Building And Holders
+              </Box>
+              <Box className="timeline-content">
+                <Typography variant="h3" my={3}>
+                  (Months 3-6)
+                </Typography>
+                <Box component="ul">
+                  <Box component="li"> -Create all social media platforms.</Box>
+                  <Box component="li">-Engage with all crypto influencers.</Box>
+                  <Box component="li">
+                    - Launch presale tokens for 3 months for early investors.
+                  </Box>
+                  <Box component="li"> -Get 5,000 Targaryen holders.</Box>
+                </Box>
+              </Box>
+            </Box>
+
+            <Box className="timeline-item">
+              <Box className="timeline-header">
+                Grow Holders & Prepare For Targaryen War
+              </Box>
+              <Box className="timeline-content">
+                <Typography variant="h3" my={3}>
+                  (Months 3-6)
+                </Typography>
+                <Box component="ul">
+                  <Box component="li">
+                    - Release tokens for website for public fairly by 3 months.
+                  </Box>
+                  <Box component="li"> -Get 10,000 Targaryen holders.</Box>
+                  <Box component="li">
+                    - Initiate war strategy between holders to build wealth for
+                    core community & future.
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+
+            <Box className="timeline-item">
+              <Box className="timeline-header">
+                Token Listing And Community Growth And Start War
+              </Box>
+              <Box className="timeline-content">
+                <Typography variant="h3" my={3}>
+                  (Months 12-13)
+                </Typography>
+                <Box component="ul">
+                  <Box component="li">
+                    - Listing for all decentralized platform after year of token
+                    launch.
+                  </Box>
+                  <Box component="li">
+                    - Prepare war with all crypto coin, making ranking on
+                    exchanges.
+                  </Box>
+                  <Box component="li"> -Get 20,000 Targaryen holders.</Box>
+                  <Box component="li">
+                    - Start looking for partnership with major film, producers
+                    and writers for major film production.
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>
