@@ -1,7 +1,4 @@
 import { Container, Paper, Typography, Box } from "@mui/material";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import React from "react";
 import { roadmapBg } from "../components/SmallComponents/Images";
 
@@ -105,52 +102,6 @@ function TargaryenRoadmap() {
             driving decentralized finance forward and integrating Targaryen
             Token across multiple platforms and ecosystems.
           </Typography>
-        </Box>
-
-        <Box sx={{ maxWidth: 1200, margin: "auto", padding: 4 }}>
-          <Slider {...settings}>
-            {data.map((item, index) => (
-              <Box key={index} sx={{ padding: 2 }}>
-                <Paper
-                  elevation={10}
-                  sx={{
-                    backgroundColor: "#1C1C1C",
-                    color: "white",
-                    padding: 4,
-                    borderRadius: 2,
-                  }}
-                >
-                  <Typography
-                    variant="h5"
-                    gutterBottom
-                    sx={{
-                      backgroundColor: "#B71C1C",
-                      padding: 1,
-                      borderRadius: 1,
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ marginBottom: 2, textAlign: "center" }}
-                  >
-                    ({item.timeline})
-                  </Typography>
-                  {item.content.map((line, i) => (
-                    <Typography
-                      key={i}
-                      variant="body1"
-                      sx={{ marginBottom: 1 }}
-                    >
-                      - {line}
-                    </Typography>
-                  ))}
-                </Paper>
-              </Box>
-            ))}
-          </Slider>
         </Box>
       </Container>
     </Box>
