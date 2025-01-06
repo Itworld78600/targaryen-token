@@ -13,7 +13,7 @@ function Presale() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
         pt: { xs: 5, md: 12 },
-        pb: { xs: 2, md: 5 },
+        // pb: { xs: 2, md: 5 },
       }}
     >
       <Container maxWidth={"xl"}>
@@ -60,6 +60,7 @@ function Presale() {
       </Container>
       <Box
         sx={{
+          mt: 5,
           height: "13px",
           width: "100%",
           background:
