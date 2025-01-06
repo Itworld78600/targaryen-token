@@ -12,7 +12,7 @@ export default function Loading({ loading }) {
         }}
         open={loading}
       >
-        <RingLoader color="#000000" size={150} />
+        <RingLoader color="#ffffff" size={150} />
       </Backdrop>
     </div>
   );

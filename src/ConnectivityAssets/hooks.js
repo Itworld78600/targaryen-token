@@ -1,6 +1,7 @@
 import tokenAbi from "./tokenAbi.json";
-import stakingAbi from "./stakingAbi.json";
-import { tokenAddress, stakingAddress } from "./environment";
+import presaleAbi from "./presaleAbi.json";
+import usdtAbi from "./usdtAbi.json";
+import { tokenAddress, presaleAddress, usdtAddress } from "./environment";
 import { readContract, writeContract } from "wagmi/actions";
 import { waitForTransaction } from "@wagmi/core";
 
@@ -16,10 +17,20 @@ export const tokenReadFunction = async (functionName, args) => {
   return data;
 };
 
-export const stakingReadFunction = async (functionName, args) => {
+export const usdtReadFunction = async (functionName, args) => {
   const data = await readContract({
-    address: stakingAddress,
-    abi: stakingAbi,
+    address: usdtAddress,
+    abi: usdtAbi,
+    functionName,
+    args,
+  });
+  return data;
+};
+
+export const presaleReadFunction = async (functionName, args) => {
+  const data = await readContract({
+    address: presaleAddress,
+    abi: presaleAbi,
     functionName,
     args,
   });
@@ -38,10 +49,21 @@ export const tokenWriteFunction = async (functionName, args) => {
   return receipt;
 };
 
-export const stakingWriteFunction = async (functionName, args, value) => {
+export const usdtWriteFunction = async (functionName, args) => {
   const { hash } = await writeContract({
-    address: stakingAddress,
-    abi: stakingAbi,
+    address: usdtAddress,
+    abi: usdtAbi,
+    functionName,
+    args,
+  });
+  const receipt = await waitForTransaction({ hash });
+  return receipt;
+};
+
+export const presaleWriteFunction = async (functionName, args, value) => {
+  const { hash } = await writeContract({
+    address: presaleAddress,
+    abi: presaleAbi,
     functionName,
     args,
     value,

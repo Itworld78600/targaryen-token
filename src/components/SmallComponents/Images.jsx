@@ -11,7 +11,7 @@ import feature_3 from "../../assets/feature-3.png";
 import feature_4 from "../../assets/feature-4.png";
 import bannerImg from "../../assets/bannerImg.jpg";
 import reverseImg from "../../assets/reverse.png";
-import ethIcon from "../../assets/ethIcon.png";
+import ethIcon from "../../assets/bnb.png";
 import usdtIcon from "../../assets/usdtIcon.png";
 import cardIcon from "../../assets/cardIcon.png";
 import presaleBg from "../../assets/presaleBg.png";

@@ -1,5 +1,7 @@
-import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, TextField, useMediaQuery } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../utils/utils";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 import TimerCountDown from "./SmallComponents/PresaleTimer";
 import {
   reverseImg,
@@ -7,16 +9,270 @@ import {
   usdtIcon,
   cardIcon,
 } from "./SmallComponents/Images";
+import {
+  presaleReadFunction,
+  presaleWriteFunction,
+  tokenReadFunction,
+  usdtWriteFunction,
+} from "../ConnectivityAssets/hooks";
+import { formatUnits, parseUnits } from "viem";
+import { presaleAddress } from "../ConnectivityAssets/environment";
+import { ToastNotify } from "./SmallComponents/AppComponents";
+import Loading from "./SmallComponents/loading";
 
 function PresaleBox() {
-  const [buyingToken, setBuyingToken] = useState("ETH");
+  const mobileMatches = useMediaQuery("(max-width:650px)");
+  const [buyingToken, setBuyingToken] = useState("BNB");
   const [amount, setAmount] = useState("");
+  const { open } = useWeb3Modal();
+  const { account } = useContext(AppContext);
+  const [preSaleEndedStatus, setPresaleEndedStatus] = useState(false);
   const [recivedTokens, setreceivedTokens] = useState(0);
+  const [tokenPerUSDT, settokenPerUSDT] = useState(0);
+  const [tokenPerETH, settokenPerETH] = useState(0);
+  const [tokenPrice, settokenPrice] = useState(0);
+  const [nextTokenPrice, setNextTokenPrice] = useState(0);
+  const [currentStage, setcurrentStage] = useState(0);
+  const [loading, setloading] = useState(false);
+  const [amountRaisedForAll, setamountRaisedForAll] = useState(0);
+  const [totalSoldTokens, setTotalSoldTokens] = useState(0);
+  const [progressBarForAll, setprogressBarForAll] = useState(0);
+  const [userPurchasedTokens, setuserPurchasedTokens] = useState(0);
+  const [usdtToRaised, setusdtToRaised] = useState(0);
+  const [tokensToSell, settokensToSell] = useState(0);
+  const [isPresaleStart, setisPresaleStart] = useState(false);
+
+  const [alertState, setAlertState] = useState({
+    open: false,
+    message: "",
+    severity: undefined,
+  });
+  const showAlert = (message, severity = "error") => {
+    setAlertState({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
   const handleInputChange = (event) => {
     const input = event.target.value;
     const newValue = input?.replace(/[^0-9.]/g, "");
     setAmount(newValue);
   };
+
+  const toLocalFormat = (val) => {
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const initVoidSigner = async () => {
+    try {
+      let dec = await tokenReadFunction("decimals");
+      dec = Number(dec.toString());
+      let stage = await presaleReadFunction("currentStage");
+      let presaleStatus = await presaleReadFunction("presaleStatus");
+      setcurrentStage(Number(stage?.toString()));
+      let usdtToToken = await presaleReadFunction("usdtToToken", [
+        "1000000000000000000",
+        stage?.toString(),
+      ]);
+      console.log(usdtToToken, "usdtToToken");
+
+      settokenPerUSDT(Number(formatUnits(usdtToToken?.toString(), dec)));
+      let ethToToken = await presaleReadFunction("nativeToToken", [
+        "1000000000000000000",
+        stage?.toString(),
+      ]);
+      settokenPerETH(Number(formatUnits(ethToToken?.toString(), dec)));
+      setisPresaleStart(presaleStatus);
+      let tokenPerUSDTContract = await presaleReadFunction("phases", [
+        +stage?.toString(),
+      ]);
+      settokenPrice(+formatUnits(tokenPerUSDTContract[2]?.toString(), dec));
+      let tokenPerUSDTNextContract = await presaleReadFunction("phases", [
+        +stage?.toString() > 9 ? 9 : +stage?.toString() + 1,
+      ]);
+      settokenPrice(+formatUnits(tokenPerUSDTContract[2]?.toString(), dec));
+      setNextTokenPrice(
+        +formatUnits(tokenPerUSDTNextContract[2]?.toString(), dec)
+      );
+      // let amountToRaised = 0;
+      // let tokensToSell = 0;
+      // let totalRaisedAmount = 0;
+      // let totalTokeSoldContract = 0;
+      // for (let index = 0; index <= +stage?.toString(); index++) {
+      //   let presaleData = await presaleReadFunction("phases", [Number(index)]);
+
+      //   let raised = Number(
+      //     parseFloat(
+      //       `${
+      //         Number(formatUnits(presaleData[1]?.toString(), dec)) /
+      //         Number(formatUnits(presaleData[2]?.toString(), dec))
+      //       }`
+      //     ).toFixed(0)
+      //   );
+
+      //   let sold = +parseFloat(
+      //     `${Number(formatUnits(presaleData[1]?.toString(), dec))}`
+      //   ).toFixed(0);
+
+      //   let toSell = Number(
+      //     parseFloat(
+      //       `${Number(formatUnits(presaleData[0]?.toString(), dec))}`
+      //     ).toFixed(0)
+      //   );
+
+      //   let toRaised = Number(
+      //     parseFloat(
+      //       `${
+      //         Number(formatUnits(presaleData[0]?.toString(), dec)) /
+      //         Number(formatUnits(presaleData[2]?.toString(), dec))
+      //       }`
+      //     ).toFixed(0)
+      //   );
+      //   tokensToSell += toSell;
+      //   amountToRaised += toRaised;
+      //   totalRaisedAmount += raised;
+      //   totalTokeSoldContract += sold;
+      // }
+      // setamountRaisedForAll(toLocalFormat(Number(totalRaisedAmount)));
+      // setTotalSoldTokens(toLocalFormat(Number(totalTokeSoldContract)));
+      // settokensToSell(toLocalFormat(Number(tokensToSell)));
+      // setusdtToRaised(toLocalFormat(Number(amountToRaised)));
+      // let progForAll = (+totalRaisedAmount / 5000000) * 100;
+      // setprogressBarForAll(+progForAll);
+
+      let presaleData = await presaleReadFunction("phases", [
+        +stage?.toString(),
+      ]);
+
+      let raised = Number(
+        parseFloat(
+          `${
+            Number(formatUnits(presaleData[1]?.toString(), dec)) /
+            Number(formatUnits(presaleData[2]?.toString(), dec))
+          }`
+        ).toFixed(0)
+      );
+
+      let sold = +parseFloat(
+        `${Number(formatUnits(presaleData[1]?.toString(), dec))}`
+      ).toFixed(0);
+
+      let toSell = Number(
+        parseFloat(
+          `${Number(formatUnits(presaleData[0]?.toString(), dec))}`
+        ).toFixed(0)
+      );
+
+      let toRaised = Number(
+        parseFloat(
+          `${
+            Number(formatUnits(presaleData[0]?.toString(), dec)) /
+            Number(formatUnits(presaleData[2]?.toString(), dec))
+          }`
+        ).toFixed(0)
+      );
+      setamountRaisedForAll(toLocalFormat(Number(raised)));
+      setTotalSoldTokens(toLocalFormat(Number(sold)));
+      settokensToSell(toLocalFormat(Number(toSell)));
+      setusdtToRaised(toLocalFormat(Number(toRaised)));
+      let progForAll = (+sold / toSell) * 100;
+      setprogressBarForAll(+progForAll);
+      const preSaleStatusContract = await presaleReadFunction(
+        "isPresaleEnded",
+        []
+      );
+      setPresaleEndedStatus(preSaleStatusContract);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const userTokenFunction = async () => {
+    try {
+      let dec = await tokenReadFunction("decimals");
+      let userData = await presaleReadFunction("users", [account]);
+      let totalPurchasedUser = +formatUnits(
+        userData[2]?.toString(),
+        +dec?.toString()
+      );
+      setuserPurchasedTokens(parseFloat(totalPurchasedUser)?.toFixed(0));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (account) {
+      userTokenFunction();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
+  useEffect(() => {
+    initVoidSigner();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const calculatorUSDT = async () => {
+      try {
+        if (buyingToken === "USDT") {
+          let tokenUSDT = +tokenPerUSDT * +amount;
+          setreceivedTokens(tokenUSDT?.toFixed(2));
+        } else {
+          let tokenETH = +tokenPerETH * +amount;
+          setreceivedTokens(tokenETH?.toFixed(2));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (+amount > 0) {
+      calculatorUSDT();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount, buyingToken]);
+
+  const buyHandler = async () => {
+    if (!account) {
+      return showAlert("Error! Please connect your wallet.");
+    }
+    if (!amount || amount <= 0) {
+      return showAlert("Error! Please enter amount to buy.");
+    }
+    try {
+      setloading(true);
+
+      if (buyingToken === "USDT") {
+        await usdtWriteFunction("approve", [
+          presaleAddress,
+          parseUnits(amount.toString(), 18).toString(),
+        ]);
+
+        await presaleWriteFunction("buyTokenUSDT", [
+          parseUnits(amount.toString(), 18).toString(),
+        ]);
+      } else {
+        await presaleWriteFunction(
+          "buyToken",
+          [],
+          parseUnits(amount.toString(), 18).toString()
+        );
+      }
+      setAmount("");
+      setreceivedTokens(0);
+      initVoidSigner();
+      userTokenFunction();
+      setloading(false);
+      showAlert("Success! Transaction Confirmed", "success");
+    } catch (error) {
+      setloading(false);
+      console.log(error);
+      showAlert(error?.shortMessage);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -31,6 +287,8 @@ function PresaleBox() {
         py: 4,
       }}
     >
+      <ToastNotify alertState={alertState} setAlertState={setAlertState} />
+      <Loading loading={loading} />
       <Box
         sx={{
           textTransform: "uppercase",
@@ -104,7 +362,8 @@ function PresaleBox() {
                 color: "#fff",
               }}
             >
-              0.5495
+              {console.log(tokenPerUSDT, "tokenPerUSDT")}
+              {tokenPerUSDT > 0 ? 1 / tokenPerUSDT : "0.000"}
             </Box>
           </Box>
           <Box sx={{ display: "flex" }}>
@@ -154,10 +413,8 @@ function PresaleBox() {
           overflow: "hidden",
         }}
       >
-        <Box sx={{ display: "flex",px:3 }}>
-          <Box
-            sx={{ display: "flex", flex: "1", flexDirection: "column", }}
-          >
+        <Box sx={{ display: "flex", px: 3 }}>
+          <Box sx={{ display: "flex", flex: "1", flexDirection: "column" }}>
             <Box
               component="span"
               sx={{
@@ -178,7 +435,7 @@ function PresaleBox() {
                 color: "#fff",
               }}
             >
-              190
+              {totalSoldTokens}
             </Box>
             <Box
               component="span"
@@ -189,12 +446,10 @@ function PresaleBox() {
                 color: "#CCCDD0",
               }}
             >
-              600,000
+              / {tokensToSell}
             </Box>
           </Box>
-          <Box
-            sx={{ display: "flex", flex: "1", flexDirection: "column", }}
-          >
+          <Box sx={{ display: "flex", flex: "1", flexDirection: "column" }}>
             <Box
               component="span"
               sx={{
@@ -215,7 +470,18 @@ function PresaleBox() {
                 color: "#fff",
               }}
             >
-              $200,099
+              ${amountRaisedForAll}
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                pt: 0.5,
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                color: "#CCCDD0",
+              }}
+            >
+              / {usdtToRaised}
             </Box>
           </Box>
         </Box>
@@ -228,13 +494,13 @@ function PresaleBox() {
           sx={{
             display: "flex",
             position: "relative",
-            height: "28.46px",
+            height: "35px",
             backgroundColor: "rgba(246, 229, 255, .04)",
           }}
         >
           <Box
             sx={{
-              width: "90.018%",
+              width: `${progressBarForAll}%`,
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
@@ -243,8 +509,8 @@ function PresaleBox() {
                 "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
               px: 0.5,
               opacity: "0.88",
-              borderTopLeftRadius: "16px",
               borderBottomLeftRadius: "16px",
+              borderBottomRightRadius: "16px",
             }}
           ></Box>
           <Box
@@ -262,9 +528,11 @@ function PresaleBox() {
               color: "#fff",
               fontSize: "0.75rem",
               fontWeight: 500,
+              textAlign: "center",
             }}
           >
-            Until Next Price Increase
+            Until Next Price Increase <br />$
+            {nextTokenPrice > 0 ? 1 / nextTokenPrice : "0.000"}
           </Box>
         </Box>
       </Box>
@@ -298,9 +566,9 @@ function PresaleBox() {
           <Button
             sx={{
               color: "#fff",
-              backgroundColor: buyingToken == "ETH" ? "#A20127" : "#161616",
+              backgroundColor: buyingToken == "BNB" ? "#A20127" : "#161616",
               borderRadius: "11.02px",
-              border: `1px solid ${buyingToken == "ETH" ? "#fff" : "#A20127"}`,
+              border: `1px solid ${buyingToken == "BNB" ? "#fff" : "#A20127"}`,
               px: 1.5,
               py: 1,
               fontSize: "0.75rem",
@@ -308,15 +576,15 @@ function PresaleBox() {
                 backgroundColor: "#A20127",
               },
             }}
-            onClick={() => setBuyingToken("ETH")}
+            onClick={() => setBuyingToken("BNB")}
           >
             <Box
               component="img"
-              sx={{ maxWidth: "100%", mr: 1 }}
+              sx={{ maxWidth: "15px", mr: 1 }}
               src={ethIcon}
-              alt="eth"
+              alt="BNB"
             />
-            <Box component="span">ETH</Box>
+            <Box component="span">BNB</Box>
           </Button>
           <Button
             sx={{
@@ -338,7 +606,7 @@ function PresaleBox() {
               component="img"
               sx={{ maxWidth: "100%", mr: 1 }}
               src={usdtIcon}
-              alt="eth"
+              alt="BNB"
             />
             <Box component="span">USDT</Box>
           </Button>
@@ -362,7 +630,7 @@ function PresaleBox() {
               component="img"
               sx={{ maxWidth: "100%", mr: 1 }}
               src={cardIcon}
-              alt="eth"
+              alt="BNB"
             />
             <Box component="span">CARD</Box>
           </Button>
@@ -377,7 +645,7 @@ function PresaleBox() {
           px: 3,
           pb: 3,
           pt: 4,
-          flexDirection:{xs:'column',sm:'row'}
+          flexDirection: { xs: "column", sm: "row" },
         }}
       >
         <Box
@@ -460,6 +728,10 @@ function PresaleBox() {
           </Box>
           <TextField
             placeholder="0.00"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={amount > 0 ? recivedTokens : "0"}
             sx={{
               background: "transparent",
               borderRadius: "unset",
@@ -494,6 +766,7 @@ function PresaleBox() {
       </Box>
       <Box>
         <Button
+          onClick={account ? () => buyHandler() : async () => await open()}
           sx={{
             color: "#fff",
             backgroundColor: "#A20127",
@@ -508,7 +781,7 @@ function PresaleBox() {
             },
           }}
         >
-          CONNECT
+          {account ? "Buy Now" : "Connect Wallet"}
         </Button>
       </Box>
     </Box>
