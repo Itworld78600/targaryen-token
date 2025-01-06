@@ -251,9 +251,9 @@ function Footer() {
                   Targaryentoken9@gmail.com
                 </Link>
               </Typography>
-              <Typography sx={{ mb: 3.5, color: "#7E7E7E", fontSize: "17px" }}>
+              {/* <Typography sx={{ mb: 3.5, color: "#7E7E7E", fontSize: "17px" }}>
                 Stamford Street, London SE19LS Greater London, England
-              </Typography>
+              </Typography> */}
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Box>
                   <Link to={"#"}>
