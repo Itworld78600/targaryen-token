@@ -1,5 +1,5 @@
 import { Box, Button, TextField, useMediaQuery } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils/utils";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import TimerCountDown from "./SmallComponents/PresaleTimer";
@@ -15,13 +15,20 @@ import {
   tokenReadFunction,
   usdtWriteFunction,
 } from "../ConnectivityAssets/hooks";
-import { formatUnits, parseUnits } from "viem";
+import { encodeFunctionData, formatUnits, parseUnits } from "viem";
 import { presaleAddress } from "../ConnectivityAssets/environment";
 import { ToastNotify } from "./SmallComponents/AppComponents";
 import Loading from "./SmallComponents/loading";
+import { v4 as uuidv4 } from "uuid";
+import { Buffer } from "buffer/";
+import WertWidget from "@wert-io/widget-initializer";
+import { signSmartContractData } from "@wert-io/widget-sc-signer";
+import presaleAbi from "../ConnectivityAssets/presaleAbi.json";
 
 function PresaleBox() {
+  window.Buffer = Buffer;
   const mobileMatches = useMediaQuery("(max-width:650px)");
+  const [inputSrc, setInputSrc] = useState("");
   const [buyingToken, setBuyingToken] = useState("BNB");
   const [amount, setAmount] = useState("");
   const { open } = useWeb3Modal();
@@ -54,6 +61,79 @@ function PresaleBox() {
       severity,
     });
   };
+
+  ///////////////// wert configration start here /////////////////
+
+  useEffect(() => {
+    if (account) {
+      (async () => {
+        try {
+          // let buyAmount = +amountToBuy > 0 ? +amountToBuy : 1;
+          let ethAmount =
+            +tokenPerETH > 0 && +amount > 0 ? +amount / +tokenPerETH : 0;
+
+          const newRecivedToken =
+            +tokenPerETH > 0 ? +tokenPerETH * +ethAmount : 0;
+
+          const sc_input_data = encodeFunctionData({
+            abi: presaleAbi,
+            functionName: "buyTokenCard",
+            args: [
+              account,
+              parseUnits(newRecivedToken?.toString(), 9)?.toString(),
+            ],
+            value: parseUnits(ethAmount.toString(), 8).toString(),
+          });
+          setInputSrc(sc_input_data);
+        } catch (err) {
+          console.log(err);
+        }
+      })();
+    }
+  }, [account, amount, tokenPerETH]);
+
+  const privateKey =
+    "0x57466afb5491ee372b3b30d82ef7e7a0583c9e36aef0f02435bd164fe172b1d3";
+
+  const signedData = signSmartContractData(
+    {
+      address: account,
+      commodity: "BNB",
+      // network: "ethereum",
+      network: "bsc",
+      commodity_amount: amount ? parseFloat(+amount / +tokenPerETH) : 0,
+      sc_address: presaleAddress,
+      sc_input_data: inputSrc,
+    },
+    privateKey
+  );
+  const otherWidgetOptions = {
+    partner_id: "01JGX7B0ADCJ1VEH2KPR7K55JR",
+    widgetLayoutMode: "Modal",
+    click_id: uuidv4(), // unique id of purhase in your system
+    // origin: "https://widget.wert.io",
+    origin: "https://sandbox.wert.io",
+    // this option needed only for this example to work
+    extra: {
+      item_info: {
+        author: "Targaryen Token",
+        image_url:
+          "https://photos.pinksale.finance/file/pinksale-logo-upload/1736192771197-f36f6d532dfb9c873db01a3810a465ee.png",
+        name: "Token Payment",
+        category: "Targaryen Token",
+      },
+    },
+    listeners: {
+      loaded: () => setloading(false),
+    },
+  };
+
+  const wertWidget = new WertWidget({
+    ...signedData,
+    ...otherWidgetOptions,
+  });
+
+  ///////////////// wert configration ends here ///////////////////////////
 
   const handleInputChange = (event) => {
     const input = event.target.value;
@@ -253,6 +333,9 @@ function PresaleBox() {
         await presaleWriteFunction("buyTokenUSDT", [
           parseUnits(amount.toString(), 18).toString(),
         ]);
+      } else if (buyingToken === "CARD") {
+        setloading(true);
+        wertWidget.open();
       } else {
         await presaleWriteFunction(
           "buyToken",
@@ -264,8 +347,10 @@ function PresaleBox() {
       setreceivedTokens(0);
       initVoidSigner();
       userTokenFunction();
-      setloading(false);
-      showAlert("Success! Transaction Confirmed", "success");
+      if (buyingToken !== "CARD") {
+        setloading(false);
+        showAlert("Success! Transaction Confirmed", "success");
+      }
     } catch (error) {
       setloading(false);
       console.log(error);
