@@ -97,6 +97,10 @@ function TargaryenRoadmap() {
                     - Launch presale tokens for 3 months for early investors.
                   </Box>
                   <Box component="li"> -Get 5,000 Targaryen holders.</Box>
+                  <Box component="li">
+                    {" "}
+                    -Update information for token on BScscan.
+                  </Box>
                 </Box>
               </Box>
             </Box>

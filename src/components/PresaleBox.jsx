@@ -315,7 +315,7 @@ function PresaleBox() {
               fontFamily: "Orbitron",
             }}
           >
-            Buy $TARG Token
+            Buy $TNG Token
           </Box>
           <Box component="span" sx={{ fontWeight: 700, color: "#EA6464" }}>
             Live

@@ -9,7 +9,7 @@ import { ToastNotify } from "../components/SmallComponents/AppComponents";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 function AddressSection() {
-  const address = "0x0b388f0a4B12b6331203139a4FE8EC91F28Fd9cF4";
+  const address = "0x718fE1Cb67275e9eC357fbe5793905bb4d8C1409";
   const [alertState, setAlertState] = useState({
     open: false,
     message: "",
@@ -103,7 +103,7 @@ function AddressSection() {
                 },
                 mt: { xs: 1, md: 0 },
                 flexGrow: 1,
-                gap:{xs:1.5,sm:0},
+                gap: { xs: 1.5, sm: 0 },
                 justifyContent: "space-between",
               }}
             >
@@ -130,17 +130,22 @@ function AddressSection() {
                       mt: 1,
                     }}
                   >
-                    Ethereum ERC-20
+                    Binance BEP-20
                   </Typography>
                 </Box>
               </Stack>
               <Stack flexDirection={"row"} gap={1} alignItems={"center"}>
-                <Box
-                  component={"img"}
-                  alt=""
-                  src={copyChain}
-                  width={{ xs: "35px", sm: "40px" }}
-                />
+                <a
+                  href="https://testnet.bscscan.com/address/0x718fE1Cb67275e9eC357fbe5793905bb4d8C1409#code"
+                  target="_blank"
+                >
+                  <Box
+                    component={"img"}
+                    alt=""
+                    src={copyChain}
+                    width={{ xs: "35px", sm: "40px" }}
+                  />
+                </a>
                 <Button
                   endIcon={<ContentCopyIcon />}
                   sx={{
