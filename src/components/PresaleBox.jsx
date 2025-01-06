@@ -99,7 +99,6 @@ function PresaleBox() {
     {
       address: account,
       commodity: "BNB",
-      // network: "ethereum",
       network: "bsc",
       commodity_amount: amount ? parseFloat(+amount / +tokenPerETH) : 0,
       sc_address: presaleAddress,
