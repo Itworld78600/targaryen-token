@@ -115,7 +115,8 @@ function TargaryenRoadmap() {
                 </Typography>
                 <Box component="ul">
                   <Box component="li">
-                    - Release tokens for website for public fairly by 3 months.
+                    - Release tokens for website for public fairly buy after
+                    presale for 3 months.
                   </Box>
                   <Box component="li"> -Get 10,000 Targaryen holders.</Box>
                   <Box component="li">
