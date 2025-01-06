@@ -227,7 +227,7 @@ function Footer() {
             }}
           >
             <Box>
-              <Typography sx={{ mb: 2 }}>
+              {/* <Typography sx={{ mb: 2 }}>
                 <Link
                   to={"tel:78678786784"}
                   style={{
@@ -238,17 +238,17 @@ function Footer() {
                 >
                   78678786784
                 </Link>
-              </Typography>
+              </Typography> */}
               <Typography sx={{ mb: 2 }}>
                 <Link
-                  to={"mailto:abc@gmail.com"}
+                  to={"mailto:Targaryentoken9@gmail.com"}
                   style={{
                     textDecoration: "none",
                     color: "#7E7E7E",
                     fontSize: "17px",
                   }}
                 >
-                  abc@gmail.com
+                  Targaryentoken9@gmail.com
                 </Link>
               </Typography>
               <Typography sx={{ mb: 3.5, color: "#7E7E7E", fontSize: "17px" }}>
@@ -329,7 +329,7 @@ function Footer() {
           alignItems: "center",
           gap: 4,
           py: 3,
-          mt: {xs:5,md:8},
+          mt: { xs: 5, md: 8 },
           flexWrap: "wrap",
         }}
       >
