@@ -26,7 +26,7 @@ function Dragonomics() {
               mx: "auto",
               position: "relative",
               zIndex: 3,
-              py:1,
+              py: 1,
               background:
                 "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
             }}
@@ -101,7 +101,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    44.44%{" "}
+                    7.5%{" "}
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%", ml: 1 }}
@@ -116,7 +116,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    8 Billion
+                    6 Billion
                   </Box>
                 </Box>
                 <Box sx={{ width: "100%" }}>
@@ -142,7 +142,7 @@ function Dragonomics() {
                           left: 0,
                           top: 0,
                           bottom: 0,
-                          width: `${44.44}%`,
+                          width: `${7.5}%`,
                           borderRadius: "20px",
                           background:
                             "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
@@ -189,7 +189,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    16.67%{" "}
+                    6.25%{" "}
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%", ml: 1 }}
@@ -204,7 +204,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    3 Billion
+                    5 Billion
                   </Box>
                 </Box>
                 <Box sx={{ width: "100%" }}>
@@ -230,7 +230,7 @@ function Dragonomics() {
                           left: 0,
                           top: 0,
                           bottom: 0,
-                          width: `${16.67}%`,
+                          width: `${6.25}%`,
                           borderRadius: "20px",
                           background:
                             "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
@@ -249,6 +249,182 @@ function Dragonomics() {
                   }}
                 >
                   Project/investments
+                </Typography>
+              </Box>
+            </Box>
+            <Box>
+              <Box
+                sx={{
+                  backgroundColor: "#161616",
+                  border: "1px solid #232323",
+                  padding: "1.25rem",
+                  borderRadius: "7.42px",
+                }}
+              >
+                <Box
+                  sx={{
+                    textAlign: "left",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 3,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontSize: "19.75px",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    1.25%{" "}
+                    <Box
+                      component="img"
+                      sx={{ maxWidth: "100%", ml: 1 }}
+                      src={dragonImg}
+                      alt=""
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: "11.09px",
+                      color: "#ffffff",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    1 Billion
+                  </Box>
+                </Box>
+                <Box sx={{ width: "100%" }}>
+                  <Stack
+                    sx={{
+                      height: "17.88px",
+                      background: "#2a2a2a",
+                      border: "1px solid #404040",
+                      mt: 1.2,
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Stack
+                      height={"100%"}
+                      alignItems={"start"}
+                      justifyContent={"center"}
+                      position={"relative"}
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          width: `${1.25}%`,
+                          borderRadius: "20px",
+                          background:
+                            "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
+                          zIndex: 0,
+                        }}
+                      />
+                    </Stack>
+                  </Stack>
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "11.09px",
+                    fontFamily: "Zen Dots",
+                    color: "#fff",
+                    mt: 1.25,
+                  }}
+                >
+                  Airdrops / giveaway
+                </Typography>
+              </Box>
+            </Box>
+            <Box>
+              <Box
+                sx={{
+                  backgroundColor: "#161616",
+                  border: "1px solid #232323",
+                  padding: "1.25rem",
+                  borderRadius: "7.42px",
+                }}
+              >
+                <Box
+                  sx={{
+                    textAlign: "left",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 3,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontSize: "19.75px",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    18.75%{" "}
+                    <Box
+                      component="img"
+                      sx={{ maxWidth: "100%", ml: 1 }}
+                      src={dragonImg}
+                      alt=""
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: "11.09px",
+                      color: "#ffffff",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    15 Billion
+                  </Box>
+                </Box>
+                <Box sx={{ width: "100%" }}>
+                  <Stack
+                    sx={{
+                      height: "17.88px",
+                      background: "#2a2a2a",
+                      border: "1px solid #404040",
+                      mt: 1.2,
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Stack
+                      height={"100%"}
+                      alignItems={"start"}
+                      justifyContent={"center"}
+                      position={"relative"}
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          width: `${18.75}%`,
+                          borderRadius: "20px",
+                          background:
+                            "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
+                          zIndex: 0,
+                        }}
+                      />
+                    </Stack>
+                  </Stack>
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "11.09px",
+                    fontFamily: "Zen Dots",
+                    color: "#fff",
+                    mt: 1.25,
+                  }}
+                >
+                  Website drop
                 </Typography>
               </Box>
             </Box>
@@ -310,7 +486,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    16.67%{" "}
+                    3.75%{" "}
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%", ml: 1 }}
@@ -351,7 +527,7 @@ function Dragonomics() {
                           left: 0,
                           top: 0,
                           bottom: 0,
-                          width: `${16.67}%`,
+                          width: `${3.75}%`,
                           borderRadius: "20px",
                           background:
                             "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
@@ -398,7 +574,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    16.67%{" "}
+                    6.25%{" "}
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%", ml: 1 }}
@@ -413,7 +589,7 @@ function Dragonomics() {
                       fontFamily: "Zen Dots",
                     }}
                   >
-                    3 Billion
+                    5 Billion
                   </Box>
                 </Box>
                 <Box sx={{ width: "100%" }}>
@@ -439,7 +615,7 @@ function Dragonomics() {
                           left: 0,
                           top: 0,
                           bottom: 0,
-                          width: `${16.67}%`,
+                          width: `${6.25}%`,
                           borderRadius: "20px",
                           background:
                             "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
@@ -461,110 +637,181 @@ function Dragonomics() {
                 </Typography>
               </Box>
             </Box>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            pt: { xs: 3.75, lg: 0 },
-          }}
-        >
-          <Box
-            sx={{
-              width: "600px",
-              maxWidth: "100%",
-              position: "relative",
-              zIndex: 3,
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: "#161616",
-                border: "1px solid #232323",
-                padding: "1.25rem",
-                borderRadius: "7.42px",
-              }}
-            >
+            <Box>
               <Box
                 sx={{
-                  textAlign: "left",
-                  color: "#ffffff",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: 3,
+                  backgroundColor: "#161616",
+                  border: "1px solid #232323",
+                  padding: "1.25rem",
+                  borderRadius: "7.42px",
                 }}
               >
                 <Box
                   sx={{
-                    fontSize: "19.75px",
-                    fontFamily: "Zen Dots",
+                    textAlign: "left",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 3,
                   }}
                 >
-                  16.67%{" "}
                   <Box
-                    component="img"
-                    sx={{ maxWidth: "100%", ml: 1 }}
-                    src={dragonImg}
-                    alt=""
-                  />
+                    sx={{
+                      fontSize: "19.75px",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    18.75%{" "}
+                    <Box
+                      component="img"
+                      sx={{ maxWidth: "100%", ml: 1 }}
+                      src={dragonImg}
+                      alt=""
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: "11.09px",
+                      color: "#ffffff",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    15 billion
+                  </Box>
                 </Box>
-                <Box
+                <Box sx={{ width: "100%" }}>
+                  <Stack
+                    sx={{
+                      height: "17.88px",
+                      background: "#2a2a2a",
+                      border: "1px solid #404040",
+                      mt: 1.2,
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Stack
+                      height={"100%"}
+                      alignItems={"start"}
+                      justifyContent={"center"}
+                      position={"relative"}
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          width: `${18.75}%`,
+                          borderRadius: "20px",
+                          background:
+                            "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
+                          zIndex: 0,
+                        }}
+                      />
+                    </Stack>
+                  </Stack>
+                </Box>
+                <Typography
                   sx={{
                     fontSize: "11.09px",
-                    color: "#ffffff",
                     fontFamily: "Zen Dots",
+                    color: "#fff",
+                    mt: 1.25,
                   }}
                 >
-                  3 Billion
-                </Box>
+                  Dex exchanges
+                </Typography>
               </Box>
-              <Box sx={{ width: "100%" }}>
-                <Stack
-                  sx={{
-                    height: "17.88px",
-                    background: "#2a2a2a",
-                    border: "1px solid #404040",
-                    mt: 1.2,
-                    borderRadius: "20px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Stack
-                    height={"100%"}
-                    alignItems={"start"}
-                    justifyContent={"center"}
-                    position={"relative"}
-                  >
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: `${16.67}%`,
-                        borderRadius: "20px",
-                        background:
-                          "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
-                        zIndex: 0,
-                      }}
-                    />
-                  </Stack>
-                </Stack>
-              </Box>
-              <Typography
+            </Box>
+            <Box>
+              <Box
                 sx={{
-                  fontSize: "11.09px",
-                  fontFamily: "Zen Dots",
-                  color: "#fff",
-                  mt: 1.25,
+                  backgroundColor: "#161616",
+                  border: "1px solid #232323",
+                  padding: "1.25rem",
+                  borderRadius: "7.42px",
                 }}
               >
-                Advertisement
-              </Typography>
+                <Box
+                  sx={{
+                    textAlign: "left",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 3,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontSize: "19.75px",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    37.5%{" "}
+                    <Box
+                      component="img"
+                      sx={{ maxWidth: "100%", ml: 1 }}
+                      src={dragonImg}
+                      alt=""
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: "11.09px",
+                      color: "#ffffff",
+                      fontFamily: "Zen Dots",
+                    }}
+                  >
+                    30 Billion
+                  </Box>
+                </Box>
+                <Box sx={{ width: "100%" }}>
+                  <Stack
+                    sx={{
+                      height: "17.88px",
+                      background: "#2a2a2a",
+                      border: "1px solid #404040",
+                      mt: 1.2,
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Stack
+                      height={"100%"}
+                      alignItems={"start"}
+                      justifyContent={"center"}
+                      position={"relative"}
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          width: `${37.5}%`,
+                          borderRadius: "20px",
+                          background:
+                            "linear-gradient(90deg, rgba(218,86,86,1) 0%, rgba(162,1,39,1) 100%, rgba(162,1,39,1) 100%)",
+                          zIndex: 0,
+                        }}
+                      />
+                    </Stack>
+                  </Stack>
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "11.09px",
+                    fontFamily: "Zen Dots",
+                    color: "#fff",
+                    mt: 1.25,
+                  }}
+                >
+                  Dragon burn
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Box>
