@@ -33,6 +33,7 @@ function PresaleBox() {
   const [amount, setAmount] = useState("");
   const { open } = useWeb3Modal();
   const { account } = useContext(AppContext);
+  const [bnbPrice, setBnbPrice] = useState(0);
   const [preSaleEndedStatus, setPresaleEndedStatus] = useState(false);
   const [recivedTokens, setreceivedTokens] = useState(0);
   const [tokenPerUSDT, settokenPerUSDT] = useState(0);
@@ -70,19 +71,19 @@ function PresaleBox() {
         try {
           // let buyAmount = +amountToBuy > 0 ? +amountToBuy : 1;
           let ethAmount =
-            +tokenPerETH > 0 && +amount > 0 ? +amount / +tokenPerETH : 0;
+            +tokenPerETH > 0 && +amount > 0 ? +amount / +bnbPrice : 0;
 
           const newRecivedToken =
-            +tokenPerETH > 0 ? +tokenPerETH * +ethAmount : 0;
+            +tokenPerUSDT > 0 ? +tokenPerUSDT * +amount : 0;
 
           const sc_input_data = encodeFunctionData({
             abi: presaleAbi,
             functionName: "buyTokenCard",
             args: [
               account,
-              parseUnits(newRecivedToken?.toString(), 9)?.toString(),
+              parseUnits(newRecivedToken?.toString(), 18)?.toString(),
             ],
-            value: parseUnits(ethAmount.toString(), 8).toString(),
+            value: parseUnits(ethAmount.toString(), 18).toString(),
           });
           setInputSrc(sc_input_data);
         } catch (err) {
@@ -90,7 +91,7 @@ function PresaleBox() {
         }
       })();
     }
-  }, [account, amount, tokenPerETH]);
+  }, [account, amount, bnbPrice, tokenPerETH, tokenPerUSDT]);
 
   const privateKey =
     "0x57466afb5491ee372b3b30d82ef7e7a0583c9e36aef0f02435bd164fe172b1d3";
@@ -100,7 +101,7 @@ function PresaleBox() {
       address: account,
       commodity: "BNB",
       network: "bsc",
-      commodity_amount: amount ? parseFloat(+amount / +tokenPerETH) : 0,
+      commodity_amount: amount ? parseFloat(+amount / +bnbPrice) : 0,
       sc_address: presaleAddress,
       sc_input_data: inputSrc,
     },
@@ -148,6 +149,8 @@ function PresaleBox() {
     try {
       let dec = await tokenReadFunction("decimals");
       dec = Number(dec.toString());
+      let getLatestPriceBnb = await presaleReadFunction("getLatestPrice");
+      getLatestPriceBnb = formatUnits(getLatestPriceBnb?.toString(), 8);
       let stage = await presaleReadFunction("currentStage");
       let presaleStatus = await presaleReadFunction("presaleStatus");
       setcurrentStage(Number(stage?.toString()));
@@ -155,7 +158,6 @@ function PresaleBox() {
         "1000000000000000000",
         stage?.toString(),
       ]);
-      console.log(usdtToToken, "usdtToToken");
 
       settokenPerUSDT(Number(formatUnits(usdtToToken?.toString(), dec)));
       let ethToToken = await presaleReadFunction("nativeToToken", [
@@ -252,6 +254,7 @@ function PresaleBox() {
           }`
         ).toFixed(0)
       );
+      setBnbPrice(getLatestPriceBnb);
       setamountRaisedForAll(toLocalFormat(Number(raised)));
       setTotalSoldTokens(toLocalFormat(Number(sold)));
       settokensToSell(toLocalFormat(Number(toSell)));
@@ -296,7 +299,7 @@ function PresaleBox() {
   useEffect(() => {
     const calculatorUSDT = async () => {
       try {
-        if (buyingToken === "USDT") {
+        if (buyingToken === "USDT" || buyingToken === "CARD") {
           let tokenUSDT = +tokenPerUSDT * +amount;
           setreceivedTokens(tokenUSDT?.toFixed(2));
         } else {
@@ -446,7 +449,6 @@ function PresaleBox() {
                 color: "#fff",
               }}
             >
-              {console.log(tokenPerUSDT, "tokenPerUSDT")}
               {tokenPerUSDT > 0 ? 1 / tokenPerUSDT : "0.000"}
             </Box>
           </Box>
