@@ -101,7 +101,9 @@ function PresaleBox() {
       address: account,
       commodity: "BNB",
       network: "bsc",
-      commodity_amount: amount ? parseFloat(+amount / +bnbPrice) : 0,
+      commodity_amount: amount
+        ? parseFloat(+amount / +bnbPrice)?.toFixed(6)
+        : 0,
       sc_address: presaleAddress,
       sc_input_data: inputSrc,
     },
