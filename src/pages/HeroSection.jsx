@@ -57,9 +57,11 @@ function HeroSection() {
                   my: 3,
                 }}
               >
-                Step into the AI-powered crypto revolution. Join our presale
-                journey to be part of reshaping the intersection of technology
-                and finance.
+                Join the Targaryen revolution and become part of a community
+                that is redefining the future of crypto while honoring a
+                legendary bloodline. Hold tight, for the Targaryen Token is set
+                to take over, bringing profits and opportunities to its loyal
+                supporters.
               </Typography>
               <Box>
                 <Button
