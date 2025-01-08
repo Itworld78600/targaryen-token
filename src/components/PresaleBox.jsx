@@ -83,7 +83,7 @@ function PresaleBox() {
               account,
               parseUnits(newRecivedToken?.toString(), 18)?.toString(),
             ],
-            value: parseUnits(ethAmount.toString(), 8).toString(),
+            value: parseUnits(ethAmount.toString(), 18).toString(),
           });
           setInputSrc(sc_input_data);
         } catch (err) {
@@ -102,7 +102,7 @@ function PresaleBox() {
       commodity: "BNB",
       network: "bsc",
       commodity_amount: amount
-        ? parseFloat(+amount / +bnbPrice)?.toFixed(6)
+        ? parseFloat(+amount / +bnbPrice)?.toFixed(8)
         : 0,
       sc_address: presaleAddress,
       sc_input_data: inputSrc,
