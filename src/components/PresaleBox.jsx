@@ -81,9 +81,9 @@ function PresaleBox() {
             functionName: "buyTokenCard",
             args: [
               account,
-              parseUnits(newRecivedToken?.toString(), 18)?.toString(),
+              parseUnits(newRecivedToken?.toString(), 8)?.toString(),
             ],
-            value: parseUnits(ethAmount.toString(), 18).toString(),
+            value: parseUnits(ethAmount.toString(), 8).toString(),
           });
           setInputSrc(sc_input_data);
         } catch (err) {
