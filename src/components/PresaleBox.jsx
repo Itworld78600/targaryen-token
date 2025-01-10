@@ -404,7 +404,7 @@ function PresaleBox() {
               fontFamily: "Orbitron",
             }}
           >
-            Buy $TNG Token
+            Buy $TGN Token
           </Box>
           <Box component="span" sx={{ fontWeight: 700, color: "#EA6464" }}>
             Live
@@ -573,11 +573,11 @@ function PresaleBox() {
             </Box>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{ display: "flex", justifyContent: "center", gap: "8px", px: 3 }}
         >
           <TimerCountDown time={1747714984} />
-        </Box>
+        </Box> */}
         <Box
           sx={{
             display: "flex",

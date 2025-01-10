@@ -68,14 +68,8 @@ function Footer() {
                       fontSize: "15px",
                     }}
                   >
-                    Solutions
+                    HOME
                   </Box>
-                  <Box
-                    component="img"
-                    sx={{ maxWidth: "100%" }}
-                    src={arrowDown}
-                    alt="arrow down"
-                  />
                 </Box>
               </Link>
               <Link to={"#"} style={{ textDecoration: "none" }}>
@@ -132,35 +126,7 @@ function Footer() {
                       fontSize: "15px",
                     }}
                   >
-                    Documents
-                  </Box>
-                  <Box
-                    component="img"
-                    sx={{ maxWidth: "100%" }}
-                    src={arrowDown}
-                    alt="arrow down"
-                  />
-                </Box>
-              </Link>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    minWidth: "120px",
-                    mt: 2.5,
-                  }}
-                >
-                  <Box
-                    component="span"
-                    sx={{
-                      color: "#fff",
-                      textTransform: "uppercase",
-                      fontSize: "15px",
-                    }}
-                  >
-                    Team
+                    ABOUT
                   </Box>
                 </Box>
               </Link>
@@ -182,14 +148,8 @@ function Footer() {
                       fontSize: "15px",
                     }}
                   >
-                    Community
+                    ROADMAP
                   </Box>
-                  <Box
-                    component="img"
-                    sx={{ maxWidth: "100%" }}
-                    src={arrowDown}
-                    alt="arrow down"
-                  />
                 </Box>
               </Link>
               <Link to={"#"} style={{ textDecoration: "none" }}>
@@ -210,7 +170,7 @@ function Footer() {
                       fontSize: "15px",
                     }}
                   >
-                    Contact
+                    TOKENOMICS
                   </Box>
                 </Box>
               </Link>
@@ -256,26 +216,26 @@ function Footer() {
               </Typography> */}
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Box>
-                  <Link to={"#"}>
+                  <a href="https://t.me/+PlbzfZY6HV02NThh" target="_blank">
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%" }}
                       src={social_1}
                       alt="social 1"
                     />
-                  </Link>
+                  </a>
                 </Box>
                 <Box>
-                  <Link to={"#"}>
+                  <a href="https://x.com/targaryentoken?s=21" target="_blank">
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%" }}
                       src={social_2}
                       alt="social 2"
                     />
-                  </Link>
+                  </a>
                 </Box>
-                <Box>
+                {/* <Box>
                   <Link to={"#"}>
                     <Box
                       component="img"
@@ -304,16 +264,16 @@ function Footer() {
                       alt="social 5"
                     />
                   </Link>
-                </Box>
+                </Box> */}
                 <Box>
-                  <Link to={"#"}>
+                  <a href="https://discord.gg/EKXrUybc" target="_blank">
                     <Box
                       component="img"
                       sx={{ maxWidth: "100%" }}
                       src={social_6}
                       alt="social 6"
                     />
-                  </Link>
+                  </a>
                 </Box>
               </Box>
             </Box>

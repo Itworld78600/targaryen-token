@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   Container,
   Hidden,
-  useMediaQuery,
   List,
   ListItemText,
   Box,
@@ -12,13 +11,12 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { logo, arrowDown } from "./SmallComponents/Images";
-import { StyledText } from "./SmallComponents/AppComponents";
 import { ExampleButton } from "./SmallComponents/StyledWalletButton";
 import { Link } from "react-router-dom";
 
 const navArray = [
   {
-    text: "SOLUTIONS",
+    text: "HOME",
     link: "#",
     icon: (
       <Box
@@ -51,26 +49,18 @@ const navArray = [
     ),
   },
   {
-    text: "DOCUMENTS",
+    text: "ABOUT",
     link: "#",
     icon: "",
   },
   {
-    text: "TEAM",
+    text: "ROADMAP",
     link: "#",
     icon: "",
   },
   {
-    text: "COMMUNITY",
+    text: "TOKENOMICS",
     link: "#",
-    icon: (
-      <Box
-        component="img"
-        sx={{ maxWidth: "100%", ml: 1 }}
-        src={arrowDown}
-        alt="arrow down"
-      />
-    ),
   },
   {
     text: "CONTACT",
@@ -81,7 +71,6 @@ const navArray = [
 
 export default function Header() {
   const [state, setState] = useState(false);
-  const matches1 = useMediaQuery("(max-width:1279px)");
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -138,7 +127,7 @@ export default function Header() {
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Box component="span">{text}</Box>
-                  {icon}
+                  {/* {icon} */}
                 </Box>
               </Link>
             </ListItemText>
@@ -155,7 +144,7 @@ export default function Header() {
       <Box
         sx={{
           background:
-            "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
+            "linear-gradient(to right, rgba(162, 1, 39, 0.8) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
         }}
         width="100%"
         py={1.5}

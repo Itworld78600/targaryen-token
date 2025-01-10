@@ -40,7 +40,7 @@ function App() {
               <HowToBuy />
               <Partners />
               <TargaryenRoadmap />
-              <Faq />
+              {/* <Faq /> */}
               <Footer />
             </>
           }

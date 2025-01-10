@@ -89,8 +89,8 @@ function HowToBuy() {
               }}
             >
               Click on „Connect Wallet“ and open your decentralized wallet to
-              verify! Make sure you are on the Ethereum Network and have some
-              ETH for fees ready.
+              verify! Make sure you are on the Binance Network and have some BNB
+              for fees ready.
             </Typography>
           </Box>
           <Box
@@ -141,8 +141,7 @@ function HowToBuy() {
                 fontWeight: 600,
               }}
             >
-              Either enter the amount of you wish to receive or the amount of
-              USDT or ETH you want to spend.
+              Enter the amount of USDT or BNB you want to spend.
             </Typography>
           </Box>
           <Box
@@ -193,9 +192,9 @@ function HowToBuy() {
                 fontWeight: 600,
               }}
             >
-              Now click on „Confirm“ and verify the transaction inside your
-              wallet! Now wait for the presale to finish and come again to claim
-              your account.
+              Now click on „Buy Now“ and verify the transaction inside your
+              wallet! That's it, Now wait for the presale to finish and come
+              again to claim your account.
             </Typography>
           </Box>
         </Box>
