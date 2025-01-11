@@ -70,8 +70,7 @@ function PresaleBox() {
       (async () => {
         try {
           // let buyAmount = +amountToBuy > 0 ? +amountToBuy : 1;
-          let ethAmount =
-            +tokenPerETH > 0 && +amount > 0 ? +amount / +bnbPrice : 0;
+          let ethAmount = +amount > 0 ? +amount / +bnbPrice : 0;
 
           const newRecivedToken =
             +tokenPerUSDT > 0 ? +tokenPerUSDT * +amount : 0;
@@ -91,7 +90,7 @@ function PresaleBox() {
         }
       })();
     }
-  }, [account, amount, bnbPrice, tokenPerETH, tokenPerUSDT]);
+  }, [account, amount, bnbPrice, tokenPerUSDT]);
 
   const privateKey =
     "0x57466afb5491ee372b3b30d82ef7e7a0583c9e36aef0f02435bd164fe172b1d3";
