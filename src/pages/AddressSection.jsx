@@ -136,7 +136,7 @@ function AddressSection() {
               </Stack>
               <Stack flexDirection={"row"} gap={1} alignItems={"center"}>
                 <a
-                  href="https://testnet.bscscan.com/address/0x718fE1Cb67275e9eC357fbe5793905bb4d8C1409#code"
+                  href="https://bscscan.com/address/0x718fE1Cb67275e9eC357fbe5793905bb4d8C1409#code"
                   target="_blank"
                 >
                   <Box

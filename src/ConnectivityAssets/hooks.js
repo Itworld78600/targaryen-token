@@ -5,8 +5,6 @@ import { tokenAddress, presaleAddress, usdtAddress } from "./environment";
 import { readContract, writeContract } from "wagmi/actions";
 import { waitForTransaction } from "@wagmi/core";
 
-// const chainId = 97;
-
 export const tokenReadFunction = async (functionName, args) => {
   const data = await readContract({
     address: tokenAddress,

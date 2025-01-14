@@ -91,7 +91,7 @@ export default function NetworkSwitch({ open, setOpen }) {
             <StyledButton
               width="230px"
               onClick={() => {
-                switchNetwork?.(97);
+                switchNetwork?.(56);
                 setOpen(false);
               }}
             >

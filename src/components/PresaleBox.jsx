@@ -484,7 +484,7 @@ function PresaleBox() {
                 color: "#fff",
               }}
             >
-              0.83
+              0.01
             </Box>
           </Box>
         </Box>
@@ -697,7 +697,7 @@ function PresaleBox() {
             />
             <Box component="span">USDT</Box>
           </Button>
-          <Button
+          {/* <Button
             sx={{
               color: "#fff",
               backgroundColor: buyingToken == "CARD" ? "#A20127" : "#161616",
@@ -720,7 +720,7 @@ function PresaleBox() {
               alt="BNB"
             />
             <Box component="span">CARD</Box>
-          </Button>
+          </Button> */}
         </Box>
       </Box>
       <Box
