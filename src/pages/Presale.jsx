@@ -6,6 +6,7 @@ import PresaleBox from "../components/PresaleBox";
 function Presale() {
   return (
     <Box
+      id="presale"
       component="section"
       sx={{
         backgroundColor: "#000000",

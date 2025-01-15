@@ -11,6 +11,7 @@ import {
 function Dragonomics() {
   return (
     <Box
+      id="tokenomics"
       component="section"
       sx={{ backgroundColor: "#000", pt: 5, pb: 8, position: "relative" }}
     >

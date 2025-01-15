@@ -5,6 +5,7 @@ import { bloodlineBg, flag } from "../components/SmallComponents/Images";
 function Bloodline() {
   return (
     <Box
+      id="about"
       component="section"
       sx={{
         background: `url('${bloodlineBg}')`,

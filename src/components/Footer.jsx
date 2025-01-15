@@ -16,6 +16,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <Box
+      id="contact-us"
       component="section"
       sx={{ backgroundColor: "#000", pt: { xs: 2, md: 5 } }}
     >
@@ -51,28 +52,11 @@ function Footer() {
             }}
           >
             <Box>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    minWidth: "120px",
-                  }}
-                >
-                  <Box
-                    component="span"
-                    sx={{
-                      color: "#fff",
-                      textTransform: "uppercase",
-                      fontSize: "15px",
-                    }}
-                  >
-                    HOME
-                  </Box>
-                </Box>
-              </Link>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Box
+                component="a"
+                href={"#presale"}
+                sx={{ textDecoration: "none" }}
+              >
                 <Box
                   sx={{
                     display: "flex",
@@ -107,8 +91,39 @@ function Footer() {
                     Live
                   </Box>
                 </Box>
-              </Link>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              </Box>
+              <Box
+                component="a"
+                href={"whitepaper.pdf"}
+                target="_blank"
+                sx={{ textDecoration: "none" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    minWidth: "120px",
+                    mt: 2.5,
+                  }}
+                >
+                  <Box
+                    component="span"
+                    sx={{
+                      color: "#fff",
+                      textTransform: "uppercase",
+                      fontSize: "15px",
+                    }}
+                  >
+                    WHITEPAPER
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                component="a"
+                href={"#about"}
+                sx={{ textDecoration: "none" }}
+              >
                 <Box
                   sx={{
                     display: "flex",
@@ -129,8 +144,12 @@ function Footer() {
                     ABOUT
                   </Box>
                 </Box>
-              </Link>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              </Box>
+              <Box
+                component="a"
+                href={"#roadmap"}
+                sx={{ textDecoration: "none" }}
+              >
                 <Box
                   sx={{
                     display: "flex",
@@ -151,8 +170,12 @@ function Footer() {
                     ROADMAP
                   </Box>
                 </Box>
-              </Link>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              </Box>
+              <Box
+                component="a"
+                href={"#tokenomics"}
+                sx={{ textDecoration: "none" }}
+              >
                 <Box
                   sx={{
                     display: "flex",
@@ -173,7 +196,7 @@ function Footer() {
                     TOKENOMICS
                   </Box>
                 </Box>
-              </Link>
+              </Box>
             </Box>
           </Grid>
           <Grid

@@ -16,20 +16,8 @@ import { Link } from "react-router-dom";
 
 const navArray = [
   {
-    text: "HOME",
-    link: "#",
-    icon: (
-      <Box
-        component="img"
-        sx={{ maxWidth: "100%", ml: 1 }}
-        src={arrowDown}
-        alt="arrow down"
-      />
-    ),
-  },
-  {
     text: "PRESALE",
-    link: "#",
+    link: "#presale",
     icon: (
       <Box
         component="span"
@@ -49,22 +37,27 @@ const navArray = [
     ),
   },
   {
+    text: "WHITEPAPER",
+    link: "whitepaper.pdf",
+    icon: "",
+  },
+  {
     text: "ABOUT",
-    link: "#",
+    link: "#about",
     icon: "",
   },
   {
     text: "ROADMAP",
-    link: "#",
+    link: "#roadmap",
     icon: "",
   },
   {
     text: "TOKENOMICS",
-    link: "#",
+    link: "#tokenomics",
   },
   {
     text: "CONTACT",
-    link: "#",
+    link: "#contact-us",
     icon: "",
   },
 ];
@@ -103,7 +96,7 @@ export default function Header() {
         />
       </Box>
       <List>
-        {navArray?.map(({ link, text, icon }) => (
+        {navArray?.map(({ link, text, icon },index) => (
           <ListItemButton key={text}>
             <ListItemText
               sx={{
@@ -115,13 +108,15 @@ export default function Header() {
                 },
               }}
             >
-              <Link
-                style={{
+              <Box
+                component="a"
+                sx={{
                   textDecoration: "none",
                   color: "#fff",
                   fontSize: "15px",
                 }}
-                to={link}
+                href={link}
+                target={index == 1 ? "_blank" : "_self"}
                 key={text}
                 mr={3}
               >
@@ -129,7 +124,7 @@ export default function Header() {
                   <Box component="span">{text}</Box>
                   {/* {icon} */}
                 </Box>
-              </Link>
+              </Box>
             </ListItemText>
           </ListItemButton>
         ))}
@@ -163,14 +158,16 @@ export default function Header() {
               alt=""
             />
             <Hidden lgDown>
-              {navArray?.map(({ link, text, icon }) => (
-                <Link
-                  style={{
+              {navArray?.map(({ link, text, icon },index) => (
+                <Box
+                  component="a"
+                  sx={{
                     textDecoration: "none",
                     color: "#fff",
                     fontSize: "15px",
                   }}
-                  to={link}
+                  href={link}
+                  target={index == 1 ? "_blank" : "_self"}
                   key={text}
                   mr={3}
                 >
@@ -178,7 +175,7 @@ export default function Header() {
                     <Box component="span">{text}</Box>
                     {icon}
                   </Box>
-                </Link>
+                </Box>
               ))}
               <ExampleButton width={"123px"} />
             </Hidden>
