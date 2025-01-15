@@ -14,6 +14,12 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Adds smooth scrolling animation
+    });
+  };
   return (
     <Box
       id="contact-us"
@@ -33,12 +39,14 @@ function Footer() {
             }}
           >
             <Box>
-              <Box
-                component="img"
-                sx={{ width: "457px", maxWidth: "100%" }}
-                src={footerLogo}
-                alt="footer logo"
-              />
+              <Link to={"/"} onClick={handleScrollToTop}>
+                <Box
+                  component="img"
+                  sx={{ width: "457px", maxWidth: "100%" }}
+                  src={footerLogo}
+                  alt="footer logo"
+                />
+              </Link>
             </Box>
           </Grid>
           <Grid

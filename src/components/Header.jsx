@@ -86,17 +86,19 @@ export default function Header() {
       onKeyDown={toggleDrawer(false)}
     >
       <Box display="flex" justifyContent="center">
-        <Box
-          component={"img"}
-          width="240px"
-          maxWidth={"100%"}
-          mt={2}
-          src={logo}
-          alt=""
-        />
+        <Link to={"/"}>
+          <Box
+            component={"img"}
+            width="240px"
+            maxWidth={"100%"}
+            mt={2}
+            src={logo}
+            alt=""
+          />
+        </Link>
       </Box>
       <List>
-        {navArray?.map(({ link, text, icon },index) => (
+        {navArray?.map(({ link, text, icon }, index) => (
           <ListItemButton key={text}>
             <ListItemText
               sx={{
@@ -150,15 +152,23 @@ export default function Header() {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Box
-              component="img"
-              maxWidth={"100%"}
-              width="240px"
-              src={logo}
-              alt=""
-            />
+            <Box>
+              <Box
+                component="a"
+                href={"/"}
+                sx={{ display: "block", maxHeight: "49px" }}
+              >
+                <Box
+                  component="img"
+                  maxWidth={"100%"}
+                  width="240px"
+                  src={logo}
+                  alt=""
+                />
+              </Box>
+            </Box>
             <Hidden lgDown>
-              {navArray?.map(({ link, text, icon },index) => (
+              {navArray?.map(({ link, text, icon }, index) => (
                 <Box
                   component="a"
                   sx={{
