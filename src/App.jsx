@@ -38,7 +38,7 @@ function App() {
               <Bloodline />
               <Dragonomics />
               <HowToBuy />
-              <Partners />
+              {/* <Partners /> */}
               <TargaryenRoadmap />
               {/* <Faq /> */}
               <Footer />

@@ -9,6 +9,7 @@ import {
 } from "../components/SmallComponents/Images";
 import Marquee from "react-fast-marquee";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
 
 function HeroSection() {
   return (
@@ -84,20 +85,26 @@ function HeroSection() {
                 >
                   Explore
                 </Button>
-                <Button
-                  sx={{
-                    fontSize: "16px",
-                    fontFamily: "Audiowide",
-                    textTransform: "none",
-                    color: "#fff",
-                    border: "1.22px solid #DA5656",
-                    borderRadius: "8px",
-                  }}
+                <Link
+                  to={"whitepaper.pdf"}
+                  style={{ textDecoration: "none" }}
+                  target="_blank"
                 >
-                  WhitePaper
-                </Button>
+                  <Button
+                    sx={{
+                      fontSize: "16px",
+                      fontFamily: "Audiowide",
+                      textTransform: "none",
+                      color: "#fff",
+                      border: "1.22px solid #DA5656",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    WhitePaper
+                  </Button>
+                </Link>
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   background:
                     "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
@@ -153,7 +160,7 @@ function HeroSection() {
                     </Box>
                   </Box>
                 </Marquee>
-              </Box>
+              </Box> */}
             </Box>
           </Grid>
           <Grid
