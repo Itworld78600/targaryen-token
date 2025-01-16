@@ -22,6 +22,7 @@ function PresaleBox() {
   const { account } = useContext(AppContext);
   const [bnbPrice, setBnbPrice] = useState(0);
   const [preSaleEndedStatus, setPresaleEndedStatus] = useState(false);
+  const [claimIsEnabled, setclaimIsEnabled] = useState(false);
   const [recivedTokens, setreceivedTokens] = useState(0);
   const [tokenPerUSDT, settokenPerUSDT] = useState(0);
   const [tokenPerETH, settokenPerETH] = useState(0);
@@ -68,6 +69,8 @@ function PresaleBox() {
       getLatestPriceBnb = formatUnits(getLatestPriceBnb?.toString(), 8);
       let stage = await presaleReadFunction("currentStage");
       let presaleStatus = await presaleReadFunction("presaleStatus");
+      let claimEnabled = await presaleReadFunction("isClaimEnabled");
+      setclaimIsEnabled(claimEnabled);
       setcurrentStage(Number(stage?.toString()));
       let usdtToToken = await presaleReadFunction("usdtToToken", [
         "1000000000000000000",
@@ -221,6 +224,23 @@ function PresaleBox() {
       setloading(false);
       console.log(error);
       showAlert(error?.shortMessage);
+    }
+  };
+
+  const claimHandler = async () => {
+    if (!account) {
+      return showAlert("Error! Please connect your wallet.");
+    }
+    try {
+      setloading(true);
+      await presaleWriteFunction("claimTokens");
+      initVoidSigner();
+      userTokenFunction();
+      setloading(false);
+      showAlert("Claimed successfully!", "success");
+    } catch (e) {
+      setloading(false);
+      showAlert(e?.shortMessage);
     }
   };
 
@@ -715,24 +735,63 @@ function PresaleBox() {
         </Box>
       </Box>
       <Box>
-        <Button
-          onClick={account ? () => buyHandler() : async () => await open()}
-          sx={{
-            color: "#fff",
-            backgroundColor: "#A20127",
-            textTransform: "uppercase",
-            borderRadius: "17.48px",
-            py: 2,
-            textAlign: "center",
-            width: "100%",
-            "&:hover": {
+        {preSaleEndedStatus && claimIsEnabled ? (
+          <Button
+            onClick={account ? () => claimHandler() : async () => await open()}
+            sx={{
+              color: "#fff",
               backgroundColor: "#A20127",
-              opacity: "0.75",
-            },
-          }}
-        >
-          {account ? "Buy Now" : "Connect Wallet"}
-        </Button>
+              textTransform: "uppercase",
+              borderRadius: "17.48px",
+              py: 2,
+              textAlign: "center",
+              width: "100%",
+              "&:hover": {
+                backgroundColor: "#A20127",
+                opacity: "0.75",
+              },
+            }}
+          >
+            {account ? "Claim Now" : "Connect Wallet"}
+          </Button>
+        ) : preSaleEndedStatus ? (
+          <Button
+            sx={{
+              color: "#d1d1d1",
+              backgroundColor: "#A20127",
+              textTransform: "uppercase",
+              borderRadius: "17.48px",
+              py: 2,
+              textAlign: "center",
+              width: "100%",
+              "&:hover": {
+                backgroundColor: "#A20127",
+                opacity: "0.75",
+              },
+            }}
+          >
+            Presale Ended
+          </Button>
+        ) : (
+          <Button
+            onClick={account ? () => buyHandler() : async () => await open()}
+            sx={{
+              color: "#fff",
+              backgroundColor: "#A20127",
+              textTransform: "uppercase",
+              borderRadius: "17.48px",
+              py: 2,
+              textAlign: "center",
+              width: "100%",
+              "&:hover": {
+                backgroundColor: "#A20127",
+                opacity: "0.75",
+              },
+            }}
+          >
+            {account ? "Buy Now" : "Connect Wallet"}
+          </Button>
+        )}
       </Box>
     </Box>
   );
