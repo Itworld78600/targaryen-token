@@ -20,7 +20,7 @@ function App() {
   const [openNetworkSwitch, setOpenNetworkSwitch] = useState(false);
 
   useEffect(() => {
-    if (account && chainId > 0 && chainId !== 97) {
+    if (account && chainId > 0 && chainId !== 56) {
       setOpenNetworkSwitch(true);
     }
   }, [chainId, account]);

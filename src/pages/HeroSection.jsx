@@ -19,7 +19,7 @@ function HeroSection() {
         backgroundSize: "100% 100%",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
-        pt: 4,
+        pt: { xs: 0, sm: 4 },
         pb: 8,
       }}
     >

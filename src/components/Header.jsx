@@ -8,6 +8,7 @@ import {
   Drawer,
   ListItemButton,
   IconButton,
+  useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { logo, arrowDown } from "./SmallComponents/Images";
@@ -63,8 +64,8 @@ const navArray = [
 ];
 
 export default function Header() {
+  const mobileMatches = useMediaQuery("(max-width:650px)");
   const [state, setState] = useState(false);
-
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -140,8 +141,9 @@ export default function Header() {
     <>
       <Box
         sx={{
-          background:
-            "linear-gradient(to right, rgba(162, 1, 39, 0.8) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
+          background: mobileMatches
+            ? "none"
+            : "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(162, 1, 39, 0.8) 36%, rgba(152, 0, 0, 0.8) 59%, rgba(0, 0, 0, 0) 100%)",
         }}
         width="100%"
         py={1.5}
