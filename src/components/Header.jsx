@@ -19,23 +19,7 @@ const navArray = [
   {
     text: "PRESALE",
     link: "#presale",
-    icon: (
-      <Box
-        component="span"
-        sx={{
-          fontSize: "11.25px",
-          textTransform: "uppercase",
-          color: "#000",
-          backgroundColor: "#F991A9",
-          borderRadius: "42px",
-          px: 0.75,
-          py: 0.2,
-          ml: 1,
-        }}
-      >
-        Live
-      </Box>
-    ),
+    icon: "",
   },
   {
     text: "WHITEPAPER",

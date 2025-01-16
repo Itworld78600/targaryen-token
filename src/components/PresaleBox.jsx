@@ -1,34 +1,21 @@
-import { Box, Button, TextField, useMediaQuery } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../utils/utils";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import TimerCountDown from "./SmallComponents/PresaleTimer";
-import {
-  reverseImg,
-  ethIcon,
-  usdtIcon,
-  cardIcon,
-} from "./SmallComponents/Images";
+import { reverseImg, ethIcon, usdtIcon } from "./SmallComponents/Images";
 import {
   presaleReadFunction,
   presaleWriteFunction,
   tokenReadFunction,
   usdtWriteFunction,
 } from "../ConnectivityAssets/hooks";
-import { encodeFunctionData, formatUnits, parseUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 import { presaleAddress } from "../ConnectivityAssets/environment";
 import { ToastNotify } from "./SmallComponents/AppComponents";
 import Loading from "./SmallComponents/loading";
-import { v4 as uuidv4 } from "uuid";
-import { Buffer } from "buffer/";
-import WertWidget from "@wert-io/widget-initializer";
-import { signSmartContractData } from "@wert-io/widget-sc-signer";
-import presaleAbi from "../ConnectivityAssets/presaleAbi.json";
 
 function PresaleBox() {
-  window.Buffer = Buffer;
-  const mobileMatches = useMediaQuery("(max-width:650px)");
-  const [inputSrc, setInputSrc] = useState("");
   const [buyingToken, setBuyingToken] = useState("BNB");
   const [amount, setAmount] = useState("");
   const { open } = useWeb3Modal();
@@ -62,79 +49,6 @@ function PresaleBox() {
       severity,
     });
   };
-
-  ///////////////// wert configration start here /////////////////
-
-  useEffect(() => {
-    if (account) {
-      (async () => {
-        try {
-          // let buyAmount = +amountToBuy > 0 ? +amountToBuy : 1;
-          let ethAmount = +amount > 0 ? +amount / +bnbPrice : 0;
-
-          const newRecivedToken =
-            +tokenPerUSDT > 0 ? +tokenPerUSDT * +amount : 0;
-
-          const sc_input_data = encodeFunctionData({
-            abi: presaleAbi,
-            functionName: "buyTokenCard",
-            args: [
-              account,
-              parseUnits(newRecivedToken?.toString(), 18)?.toString(),
-            ],
-            value: parseUnits(ethAmount.toString(), 18).toString(),
-          });
-          setInputSrc(sc_input_data);
-        } catch (err) {
-          console.log(err);
-        }
-      })();
-    }
-  }, [account, amount, bnbPrice, tokenPerUSDT]);
-
-  const privateKey =
-    "0x57466afb5491ee372b3b30d82ef7e7a0583c9e36aef0f02435bd164fe172b1d3";
-
-  const signedData = signSmartContractData(
-    {
-      address: account,
-      commodity: "BNB",
-      network: "bsc",
-      commodity_amount: amount
-        ? parseFloat(+amount / +bnbPrice)?.toFixed(8)
-        : 0,
-      sc_address: presaleAddress,
-      sc_input_data: inputSrc,
-    },
-    privateKey
-  );
-  const otherWidgetOptions = {
-    partner_id: "01JGX7B0ADCJ1VEH2KPR7K55JR",
-    widgetLayoutMode: "Modal",
-    click_id: uuidv4(), // unique id of purhase in your system
-    // origin: "https://widget.wert.io",
-    origin: "https://sandbox.wert.io",
-    // this option needed only for this example to work
-    extra: {
-      item_info: {
-        author: "Targaryen Token",
-        image_url:
-          "https://photos.pinksale.finance/file/pinksale-logo-upload/1736192771197-f36f6d532dfb9c873db01a3810a465ee.png",
-        name: "Token Payment",
-        category: "Targaryen Token",
-      },
-    },
-    listeners: {
-      loaded: () => setloading(false),
-    },
-  };
-
-  const wertWidget = new WertWidget({
-    ...signedData,
-    ...otherWidgetOptions,
-  });
-
-  ///////////////// wert configration ends here ///////////////////////////
 
   const handleInputChange = (event) => {
     const input = event.target.value;
@@ -178,52 +92,6 @@ function PresaleBox() {
       setNextTokenPrice(
         +formatUnits(tokenPerUSDTNextContract[2]?.toString(), dec)
       );
-      // let amountToRaised = 0;
-      // let tokensToSell = 0;
-      // let totalRaisedAmount = 0;
-      // let totalTokeSoldContract = 0;
-      // for (let index = 0; index <= +stage?.toString(); index++) {
-      //   let presaleData = await presaleReadFunction("phases", [Number(index)]);
-
-      //   let raised = Number(
-      //     parseFloat(
-      //       `${
-      //         Number(formatUnits(presaleData[1]?.toString(), dec)) /
-      //         Number(formatUnits(presaleData[2]?.toString(), dec))
-      //       }`
-      //     ).toFixed(0)
-      //   );
-
-      //   let sold = +parseFloat(
-      //     `${Number(formatUnits(presaleData[1]?.toString(), dec))}`
-      //   ).toFixed(0);
-
-      //   let toSell = Number(
-      //     parseFloat(
-      //       `${Number(formatUnits(presaleData[0]?.toString(), dec))}`
-      //     ).toFixed(0)
-      //   );
-
-      //   let toRaised = Number(
-      //     parseFloat(
-      //       `${
-      //         Number(formatUnits(presaleData[0]?.toString(), dec)) /
-      //         Number(formatUnits(presaleData[2]?.toString(), dec))
-      //       }`
-      //     ).toFixed(0)
-      //   );
-      //   tokensToSell += toSell;
-      //   amountToRaised += toRaised;
-      //   totalRaisedAmount += raised;
-      //   totalTokeSoldContract += sold;
-      // }
-      // setamountRaisedForAll(toLocalFormat(Number(totalRaisedAmount)));
-      // setTotalSoldTokens(toLocalFormat(Number(totalTokeSoldContract)));
-      // settokensToSell(toLocalFormat(Number(tokensToSell)));
-      // setusdtToRaised(toLocalFormat(Number(amountToRaised)));
-      // let progForAll = (+totalRaisedAmount / 5000000) * 100;
-      // setprogressBarForAll(+progForAll);
-
       let presaleData = await presaleReadFunction("phases", [
         +stage?.toString(),
       ]);
@@ -300,7 +168,7 @@ function PresaleBox() {
   useEffect(() => {
     const calculatorUSDT = async () => {
       try {
-        if (buyingToken === "USDT" || buyingToken === "CARD") {
+        if (buyingToken === "USDT") {
           let tokenUSDT = +tokenPerUSDT * +amount;
           setreceivedTokens(tokenUSDT?.toFixed(2));
         } else {
@@ -336,9 +204,6 @@ function PresaleBox() {
         await presaleWriteFunction("buyTokenUSDT", [
           parseUnits(amount.toString(), 18).toString(),
         ]);
-      } else if (buyingToken === "CARD") {
-        setloading(true);
-        wertWidget.open();
       } else {
         await presaleWriteFunction(
           "buyToken",
@@ -350,10 +215,8 @@ function PresaleBox() {
       setreceivedTokens(0);
       initVoidSigner();
       userTokenFunction();
-      if (buyingToken !== "CARD") {
-        setloading(false);
-        showAlert("Success! Transaction Confirmed", "success");
-      }
+      setloading(false);
+      showAlert("Success! Transaction Confirmed", "success");
     } catch (error) {
       setloading(false);
       console.log(error);
@@ -406,7 +269,7 @@ function PresaleBox() {
             Buy $TGN Token
           </Box>
           <Box component="span" sx={{ fontWeight: 700, color: "#EA6464" }}>
-            Live
+            {isPresaleStart ? "Live" : "Paused"}
           </Box>
         </Box>
         <Box
